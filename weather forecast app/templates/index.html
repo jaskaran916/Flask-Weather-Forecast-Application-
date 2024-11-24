@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather Forecast</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Weather Forecast</h1>
+        <form method="post">
+            <input type="text" name="city" placeholder="Enter city name">
+            <button type="submit">Get Weather</button>
+        </form>
+        {% if error_message %}
+            <p class="error">{{ error_message }}</p>
+        {% elif weather_data %}
+            <h2>Weather for {{ city }}</h2>
+            <div class="current-weather">
+                <p>Temperature: {{ weather_data['main']['temp'] }}°C</p>
+                <p>Description: {{ weather_data['weather'][0]['description'] }}</p>
+                <p>Humidity: {{ weather_data['main']['humidity'] }}%</p>
+                <p>Wind Speed: {{ weather_data['wind']['speed'] }} m/s</p>
+            </div>
+            {% endif %}
+            <img src="{{ url_for('static', filename='compass.jpg') }}" alt="Compass">
+    </div>
+    
+</body>
+</html>
